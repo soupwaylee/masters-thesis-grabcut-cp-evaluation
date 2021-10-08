@@ -1,8 +1,8 @@
 import sqlite3
 import pandas as pd
 
-PATH_INTERACTIONS = 'postgres/20211004-193347_grab_cut_interaction.csv'
-PATH_MASKS = 'postgres/20211004-193347_grab_cut_mask.csv'
+PATH_INTERACTIONS = 'postgres/20211006-112022_grab_cut_interaction.csv'
+PATH_MASKS = 'postgres/20211006-112022_grab_cut_mask.csv'
 
 IMG_SHAPE = (384, 512)
 
