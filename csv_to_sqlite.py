@@ -1,8 +1,10 @@
 import sqlite3
 import pandas as pd
 
-PATH_INTERACTIONS = 'postgres/20211006-112022_grab_cut_interaction.csv'
-PATH_MASKS = 'postgres/20211006-112022_grab_cut_mask.csv'
+latest_file_timestamp = '20211009-081653'
+
+PATH_INTERACTIONS = f'postgres/{latest_file_timestamp}_grab_cut_interaction.csv'
+PATH_MASKS = f'postgres/{latest_file_timestamp}_grab_cut_mask.csv'
 
 IMG_SHAPE = (384, 512)
 
@@ -18,6 +20,7 @@ print(f"[*] {len(interactions_df)} segmentation requests have been made.")
 # Read from CSV, format column name
 masks_df = pd.read_csv(PATH_MASKS)
 masks_df = masks_df.rename(columns={'id': 'mask_uuid'})
+masks_df = masks_df.rename(columns={'interactionrecord_id': 'interaction_uuid'})
 
 print(f"[*] {len(masks_df)} masks have been submitted.")
 
