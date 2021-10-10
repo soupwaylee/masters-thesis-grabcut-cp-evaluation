@@ -1,7 +1,7 @@
 import sqlite3
 import pandas as pd
 
-latest_file_timestamp = '20211009-081653'
+latest_file_timestamp = '20211010-151010'
 
 PATH_INTERACTIONS = f'postgres/{latest_file_timestamp}_grab_cut_interaction.csv'
 PATH_MASKS = f'postgres/{latest_file_timestamp}_grab_cut_mask.csv'
