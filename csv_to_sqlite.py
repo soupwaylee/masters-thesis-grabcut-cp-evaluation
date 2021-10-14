@@ -1,10 +1,11 @@
 import sqlite3
 import pandas as pd
 
-latest_file_timestamp = '20211010-151010'
+latest_file_timestamp = '20211013-112256'
 
 PATH_INTERACTIONS = f'postgres/{latest_file_timestamp}_grab_cut_interaction.csv'
 PATH_MASKS = f'postgres/{latest_file_timestamp}_grab_cut_mask.csv'
+PATH_DEMOGRAPHICS = f"postgres/{latest_file_timestamp}_participant_data.csv"
 
 IMG_SHAPE = (384, 512)
 
@@ -57,11 +58,19 @@ imgs = pd.api.types.CategoricalDtype(ordered=True, categories=image_categories)
 interactions_df['image_id'] = interactions_df['image_id'].astype(imgs)
 
 # Read from CSV, format column name
-masks_df = pd.read_csv(PATH_MASKS)
+masks_df = pd.read_csv(PATH_MASKS, skiprows=[1, 2, 3, 4])
 masks_df = masks_df.rename(columns={'id': 'mask_uuid'})
 masks_df = masks_df.rename(columns={'interactionrecord_id': 'interaction_uuid'})
 
 print(f"[*] {len(masks_df)} masks have been submitted.")
+
+# Read from CSV, format columnn name
+respondents_df = pd.read_csv(PATH_DEMOGRAPHICS, skiprows=[1])
+respondents_df = respondents_df.rename(columns={
+    'id': 'participant_uuid',
+})
+
+print(f"[*] {len(respondents_df)} people have submitted their demographic data.")
 
 # Get interactions where there is both a record and a mask available.
 interactions_with_submission_df = pd.merge(interactions_df, masks_df, how='inner', on=['session_id', 'image_id'])
@@ -84,6 +93,7 @@ print(f"[*] Connected to DB.")
 image_metadata_df.to_sql(name='images', con=conn, index=False, if_exists='replace')
 interactions_df.to_sql(name='interactions', con=conn, index=False, if_exists='replace')
 masks_df.to_sql(name='masks', con=conn, index=False, if_exists='replace')
+respondents_df.to_sql(name='respondents', con=conn, index=False, if_exists='replace')
 interactions_with_submission_df.to_sql(name='interactionswithsubmissions', con=conn, index=False, if_exists='replace')
 print(f"[*] Wrote to DB.")
 conn.close()
