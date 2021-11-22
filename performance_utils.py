@@ -53,6 +53,7 @@ def get_ppv_column(annotator_performance_df):
     gamma = annotator_performance_df.prevalence
     return p * gamma / (p * gamma + (1 - q) * (1 - gamma))
 
+
 def get_bias_for_mask_performance_row(row, prevalences_df):
     image_id = row['image_id']
     prevalence = prevalences_df.loc[prevalences_df['image_id'] == image_id, ['prevalence']].values[0]
@@ -62,12 +63,12 @@ def get_bias_for_mask_performance_row(row, prevalences_df):
     return sensitivity * prevalence + (1 - specificity) * (1 - prevalence)
 
 
-def get_performance_cdf_df(annotator_performance_df, performance_value_name, category_name, categories):
+def get_cdf_comparison_visualization_df(df, column_name, category_name, categories):
     cdfs = []
 
     for cat in categories:
-        vals = annotator_performance_df \
-            .loc[annotator_performance_df[category_name] == cat][performance_value_name] \
+        vals = df \
+            .loc[df[category_name] == cat][column_name] \
             .values \
             .tolist()
         print(f'[*] {len(vals)} records for {category_name} == {cat}')
