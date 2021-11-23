@@ -88,7 +88,7 @@ interactions_df = pd.merge(interactions_df, image_metadata_df, how='inner', on=[
 interactions_with_submission_df = pd.merge(interactions_with_submission_df, image_metadata_df, how='inner', on=['image_id'])
 
 # Write back to db
-conn = sqlite3.connect('grabcutstudy.db')
+conn = sqlite3.connect('../grabcutstudy.db')
 print(f"[*] Connected to DB.")
 image_metadata_df.to_sql(name='images', con=conn, index=False, if_exists='replace')
 interactions_df.to_sql(name='interactions', con=conn, index=False, if_exists='replace')
