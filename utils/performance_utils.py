@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-import Cdf
+import utils.Cdf as Cdf
 
 
 def get_iou_for_mask_row(row, gt):
@@ -66,12 +66,16 @@ def get_bias_for_mask_performance_row(row, prevalences_df):
 def get_cdf_comparison_visualization_df(df, column_name, category_name, categories):
     cdfs = []
 
+    print(f'''
+        Building CDFs of {column_name}-values 
+        for {categories} in {category_name}
+    ''')
     for cat in categories:
         vals = df \
             .loc[df[category_name] == cat][column_name] \
             .values \
             .tolist()
-        print(f'[*] {len(vals)} records for {category_name} == {cat}')
+        print(f'[*] {len(vals)} values for {category_name}: {cat}')
         cdfs.append(Cdf.MakeCdfFromList(vals))
 
     def cdf_to_concat_df(cdf, category):
