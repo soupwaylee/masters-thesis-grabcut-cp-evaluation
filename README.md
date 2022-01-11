@@ -12,5 +12,6 @@ For this, I am considering the following three aspects
 
 based on a unsupervised user study conducted over the course of a month.
 
-(https://github.com/soupwaylee/masters-thesis-grabcut-cp-evaluation/blob/main/study_timeline.png "Study Participation Activity Timeline")
+![Study participation activity timeline from September 16th to October 13th with slightly elevated engagement rate on
+Mondays September 20th, 27th and October 4th and towards the end of September.](https://github.com/soupwaylee/masters-thesis-grabcut-cp-evaluation/blob/main/study_timeline.png "Study Participation Activity Timeline")
 
