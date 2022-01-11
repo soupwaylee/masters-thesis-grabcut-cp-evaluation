@@ -52,7 +52,8 @@ interactions_df['first_interaction_time'] = interactions_df['first_interaction_t
 interactions_df['submission_time'] = interactions_df['submission_time'] + pd.Timedelta(2, unit='h')
 interactions_df['submission_time'] = interactions_df['submission_time'].apply(format_time)
 
-image_categories = ['lym0', 'lym17', 'neu0', 'neu12', 'neu90', 'agg17', 'agg23', 'agg185', 'neurblas5', 'neurblas10', 'neurblas16', 'normal2', 'normal4']
+image_categories = ['lym0', 'lym17', 'neu0', 'neu12', 'neu90', 'agg17', 'agg23', 'agg185', 'neurblas5', 'neurblas10',
+                    'neurblas16', 'normal2', 'normal4']
 imgs = pd.api.types.CategoricalDtype(ordered=True, categories=image_categories)
 
 interactions_df['image_id'] = interactions_df['image_id'].astype(imgs)
@@ -82,10 +83,12 @@ interactions_with_submission_df.rename(columns={
 }, inplace=True)
 del interactions_with_submission_df['interaction_uuid_y']
 
-print(f'[*] {len(interactions_with_submission_df)} segmentations requested given that a final mask choice was submitted.')
+print(
+    f'[*] {len(interactions_with_submission_df)} segmentations requested given that a final mask choice was submitted.')
 
 interactions_df = pd.merge(interactions_df, image_metadata_df, how='inner', on=['image_id'])
-interactions_with_submission_df = pd.merge(interactions_with_submission_df, image_metadata_df, how='inner', on=['image_id'])
+interactions_with_submission_df = pd.merge(interactions_with_submission_df, image_metadata_df, how='inner',
+                                           on=['image_id'])
 
 # Write back to db
 conn = sqlite3.connect('../grabcutstudy.db')
