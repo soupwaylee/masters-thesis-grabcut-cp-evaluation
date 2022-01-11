@@ -10,5 +10,7 @@ For this, I am considering the following three aspects
 
 3. Disagreement
 
-based on an unsupervised user study conducted over the course of a month.
+based on a unsupervised user study conducted over the course of a month.
+
+(https://github.com/soupwaylee/masters-thesis-grabcut-cp-evaluation/blob/main/study_timeline.png "Study Participation Activity Timeline")
 
