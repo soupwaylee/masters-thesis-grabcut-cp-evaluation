@@ -27,7 +27,7 @@ def get_staple_outputs(computed_masks, annotator_masks, annotator_masks_uuids, i
     staple_filter = sitk.STAPLEImageFilter()
     seg_estimate = staple_filter.Execute(sitk_images)
 
-    print(f"[*] {img_id}:\t {staple_filter.GetElapsedIterations()} STAPLE iterations.")
+    print(f"[*] {img_id:<15} {staple_filter.GetElapsedIterations()} STAPLE iterations")
 
     # seg_estimate = sitk.GetArrayViewFromImage(result)
     sensitivities = staple_filter.GetSensitivity()
